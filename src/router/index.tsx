@@ -1,8 +1,12 @@
-import {useRoutes} from 'react-router-dom'
+import type { RouteObject } from 'react-router-dom';
+import { lazy } from 'react';
 
-const routes = useRoutes([{
-  path:"/",
-  // element:
-}])
+const Layout = lazy(() => import('@/views/Layout'));
+const routes: RouteObject[] = [
+	{
+		path: '/',
+		element: <Layout />,
+	},
+];
 
-export default routes
+export default routes;
