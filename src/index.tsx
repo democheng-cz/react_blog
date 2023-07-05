@@ -5,6 +5,8 @@ import { HashRouter, BrowserRouter } from 'react-router-dom';
 import App from './App';
 import store from './store/index';
 
+import '@/assets/css/index.css';
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 	// <React.StrictMode>
 	<Provider store={store}>
