@@ -1,13 +1,17 @@
 class DcStorage {
 	setItem(key: string, val: any) {
-		if (typeof val === 'object') {
-			val = JSON.stringify(val);
-		}
-		window.localStorage.setItem(key, val);
+		console.log(val);
+		console.log(JSON.stringify({ value: val }));
+		window.localStorage.setItem(key, JSON.stringify({ value: val }));
 	}
 
 	getItem(key: string) {
-		return JSON.parse(window.localStorage.getItem(key)!);
+		const val = window.localStorage.getItem(key);
+		if (val) {
+			return JSON.parse(val).value;
+		} else {
+			return undefined;
+		}
 	}
 
 	removeItem(key: string) {

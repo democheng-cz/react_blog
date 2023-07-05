@@ -2,7 +2,7 @@ import react, { useState, Suspense } from 'react';
 import routes from './router';
 import { useRoutes } from 'react-router-dom';
 
-import Layout from './views/Layout';
+import Container from './views/Layout';
 
 function App() {
 	return (

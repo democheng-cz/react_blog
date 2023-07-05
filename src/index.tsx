@@ -6,13 +6,14 @@ import App from './App';
 import store from './store/index';
 
 import '@/assets/css/index.css';
+import '@/assets/less/reset.css';
+import 'normalize.css';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 	// <React.StrictMode>
 	<Provider store={store}>
 		<BrowserRouter>
 			<App />
-			<div>react+ts</div>
 		</BrowserRouter>
 	</Provider>
 	// </React.StrictMode>

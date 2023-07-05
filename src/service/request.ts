@@ -1,11 +1,13 @@
 import axios from 'axios';
 import type { AxiosInstance, AxiosResponse, AxiosRequestConfig } from 'axios';
+import type { BaseResponseType } from '../../base';
 
 import { dcStorage } from '@/utils';
 
 class DcRequest {
 	instance: AxiosInstance;
 	constructor() {
+		console.log(import.meta.env.VITE_BASE_URL);
 		this.instance = axios.create({
 			baseURL: '/api',
 			timeout: 20000,
@@ -36,12 +38,12 @@ class DcRequest {
 		);
 	}
 
-	request<T>(config: AxiosRequestConfig): Promise<T> {
+	request<T>(config: AxiosRequestConfig): Promise<BaseResponseType<T>> {
 		return new Promise((resolve, reject) => {
 			this.instance
 				.request(config)
 				.then((res: AxiosResponse) => {
-					resolve(res as unknown as Promise<T>);
+					resolve(res as unknown as Promise<BaseResponseType<T>>);
 				})
 				.catch((err: any) => {
 					reject(err);
@@ -49,19 +51,19 @@ class DcRequest {
 		});
 	}
 
-	get<T>(config: AxiosRequestConfig) {
+	get<T = any>(config: AxiosRequestConfig) {
 		return this.request<T>({ ...config, method: 'GET' });
 	}
 
-	post<T>(config: AxiosRequestConfig) {
+	post<T = any>(config: AxiosRequestConfig) {
 		return this.request<T>({ ...config, method: 'POST' });
 	}
 
-	delete<T>(config: AxiosRequestConfig) {
+	delete<T = any>(config: AxiosRequestConfig) {
 		return this.instance<T>({ ...config, method: 'DELETE' });
 	}
 
-	patch<T>(config: AxiosRequestConfig) {
+	patch<T = any>(config: AxiosRequestConfig) {
 		return this.instance<T>({ ...config, method: 'PATCH' });
 	}
 }

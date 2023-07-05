@@ -17,5 +17,18 @@ export default defineConfig(({ mode }) => {
 			},
 			extensions: ['.jsx', '.js', '.ts', '.tsx', '.mjs', '.cjs', '.json'],
 		},
+		server: {
+			proxy: {
+				'/api': {
+					target: 'http://localhost:8888',
+					changeOrigin: false,
+					rewrite: path => {
+						console.log('path');
+						console.log(path);
+						return path.replace(/^\/api/, '');
+					},
+				},
+			},
+		},
 	};
 });

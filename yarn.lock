@@ -1987,7 +1987,7 @@ cssesc@^3.0.0:
   resolved "https://registry.npmmirror.com/cssesc/-/cssesc-3.0.0.tgz#37741919903b868565e1c09ea747445cd18983ee"
   integrity sha512-/Tb/JcjK111nNScGob5MNtsntNM1aCNUDipB/TkwZFhyDrrE47SOx/18wF2bbjgc3ZzCSKW1T5nt5EbFoAz/Vg==
 
-csstype@^3.0.10, csstype@^3.0.2:
+csstype@^3.0.10, csstype@^3.0.2, csstype@^3.1.2:
   version "3.1.2"
   resolved "https://registry.npmmirror.com/csstype/-/csstype-3.1.2.tgz#1d4bf9d572f11c14031f0436e1c10bc1f571f50b"
   integrity sha512-I7K1Uu0MBPzaFKg4nI5Q7Vs2t+3gWWW648spaF+Rg7pI9ds18Ugn+lvg4SHczUdKlHI5LWBXyqfS8+DufyBsgQ==
@@ -2684,6 +2684,11 @@ normalize-path@^3.0.0, normalize-path@~3.0.0:
   version "3.0.0"
   resolved "https://registry.npmmirror.com/normalize-path/-/normalize-path-3.0.0.tgz#0dcd69ff23a1c9b11fd0978316644a0388216a65"
   integrity sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==
+
+normalize.css@^8.0.1:
+  version "8.0.1"
+  resolved "https://registry.npmmirror.com/normalize.css/-/normalize.css-8.0.1.tgz#9b98a208738b9cc2634caacbc42d131c97487bf3"
+  integrity sha512-qizSNPO93t1YUuUhP22btGOo3chcvDFqFaj2TRybP0DMxkHOCTYwp3n34fel4a31ORXy4m1Xq0Gyqpb5m33qIg==
 
 object-assign@^4.0.1:
   version "4.1.1"
@@ -3477,10 +3482,10 @@ strip-json-comments@^3.1.0, strip-json-comments@^3.1.1:
   resolved "https://registry.npmmirror.com/strip-json-comments/-/strip-json-comments-3.1.1.tgz#31f1281b3832630434831c310c01cccda8cbe006"
   integrity sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==
 
-styled-components@^6.0.0-rc.6:
-  version "6.0.0-rc.6"
-  resolved "https://registry.npmmirror.com/styled-components/-/styled-components-6.0.0-rc.6.tgz#5a29f73e87ea634322918bbae024baa4b57ea4cc"
-  integrity sha512-A+LmomjXH1TZp5WZIvC1KiWyYJB+DgUzv4qMvoj8WSFdteZdosAbPIihlrSjcaITzqFHxG6MBq4kZhHeI8EkEA==
+styled-components@^6.0.2:
+  version "6.0.2"
+  resolved "https://registry.npmmirror.com/styled-components/-/styled-components-6.0.2.tgz#97e94d33422d7634b5c9915a4f33c628da94c0f4"
+  integrity sha512-CRWTuYme0W4zVqzXpODByyocgVbBpRoXmaEgPGb67dvweV1igp7Ik4Z5C9e83wZ2l2hPg/XKV7cjuNxhRlC7Mg==
   dependencies:
     "@babel/cli" "^7.21.0"
     "@babel/core" "^7.21.0"
@@ -3496,20 +3501,16 @@ styled-components@^6.0.0-rc.6:
     "@emotion/unitless" "^0.8.0"
     "@types/stylis" "^4.0.2"
     css-to-react-native "^3.2.0"
+    csstype "^3.1.2"
     postcss "^8.4.23"
     shallowequal "^1.1.0"
-    stylis "^4.2.0"
+    stylis "^4.3.0"
     tslib "^2.5.0"
 
-stylis@^4.0.13:
+stylis@^4.0.13, stylis@^4.3.0:
   version "4.3.0"
   resolved "https://registry.npmmirror.com/stylis/-/stylis-4.3.0.tgz#abe305a669fc3d8777e10eefcfc73ad861c5588c"
   integrity sha512-E87pIogpwUsUwXw7dNyU4QDjdgVMy52m+XEOPEKUn161cCzWjjhPSQhByfd1CcNvrOLnXQ6OnnZDwnJrz/Z4YQ==
-
-stylis@^4.2.0:
-  version "4.2.0"
-  resolved "https://registry.npmmirror.com/stylis/-/stylis-4.2.0.tgz#79daee0208964c8fe695a42fcffcac633a211a51"
-  integrity sha512-Orov6g6BB1sDfYgzWfTHDOxamtX1bE/zo104Dh9e6fqJ3PooipYyfJ0pUmrZO2wAvO8YbEyeFrkV91XTsGMSrw==
 
 sucrase@^3.32.0:
   version "3.32.0"
