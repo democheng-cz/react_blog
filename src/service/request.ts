@@ -1,6 +1,7 @@
 import axios from 'axios';
 import type { AxiosInstance, AxiosResponse, AxiosRequestConfig } from 'axios';
 import type { BaseResponseType } from '../../base';
+import { message } from 'antd';
 
 import { dcStorage } from '@/utils';
 
@@ -8,6 +9,7 @@ class DcRequest {
 	instance: AxiosInstance;
 	constructor() {
 		console.log(import.meta.env.VITE_BASE_URL);
+		// const [messageApi] = message.useMessage();
 		this.instance = axios.create({
 			baseURL: '/api',
 			timeout: 20000,
@@ -30,6 +32,13 @@ class DcRequest {
 
 		this.instance.interceptors.response.use(
 			(res: AxiosResponse) => {
+				console.log(res);
+				if (res.data.code >= 300) {
+					message.error({
+						content: res.data.message,
+					});
+					return;
+				}
 				return res.data;
 			},
 			(err: any) => {

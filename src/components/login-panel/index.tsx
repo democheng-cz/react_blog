@@ -23,8 +23,6 @@ const LoginPanel = memo((props: any) => {
 	// const navigate = useNavigate();
 	// const dispatch = useAppDispatch();
 
-	console.log(props.userInfo);
-	console.log(props.saveUserInfo);
 	const onFinishFailed = (errorInfo: any) => {
 		messageApi.open({
 			type: 'error',
@@ -35,7 +33,6 @@ const LoginPanel = memo((props: any) => {
 	const onFinish = async (values: any) => {
 		try {
 			const res = await reqLogin(values);
-			console.log(res);
 			props.saveUserInfo({ name: 'zwc', age: 19, address: '达州市' });
 			if (res.code === 200) {
 				// dispatch(getMenuList(res.result.data.role_id));
@@ -90,7 +87,6 @@ const LoginPanel = memo((props: any) => {
 });
 
 const mapStateTopProps = (state: any) => {
-	console.log(state);
 	return {
 		userInfo: state.loginReducer.userInfo,
 	};

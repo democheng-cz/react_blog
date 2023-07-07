@@ -8,9 +8,8 @@ export const LoginWrapper = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-image: url('/public/images/login-bj.jpg');
-	background-position: center center;
-	block-size: cover;
+	background: url('/public/images/login-bj.jpg') no-repeat center center;
+	background-size: cover;
 	/* .form-wrapper {
 		background-color: rgba(255, 255, 255, 0.5);
 		padding: 30px;
