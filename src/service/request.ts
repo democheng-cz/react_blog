@@ -32,13 +32,15 @@ class DcRequest {
 
 		this.instance.interceptors.response.use(
 			(res: AxiosResponse) => {
-				console.log(res);
-				if (res.data.code >= 300) {
+				if (res.data.status >= 300) {
 					message.error({
 						content: res.data.message,
 					});
 					return;
 				}
+				message.success({
+					content: res.data.message,
+				});
 				return res.data;
 			},
 			(err: any) => {

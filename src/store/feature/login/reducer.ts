@@ -1,10 +1,9 @@
-import { SAVE_USER_INFO } from './constant';
+import { dcStorage } from '@/utils';
+import { SAVE_USER_INFO, SAVE_MENU_LIST } from './constant';
 
 const initState = {
-	userInfo: {
-		name: 'zz',
-		age: 18,
-	},
+	userInfo: dcStorage.getItem('userInfo') || {},
+	menuList: dcStorage.getItem('menuList') || {},
 };
 
 interface ActionType {
@@ -16,11 +15,18 @@ const loginReducer = (state = initState, action: ActionType) => {
 
 	switch (type) {
 		case SAVE_USER_INFO:
+			dcStorage.setItem('token', payload.token);
+			dcStorage.setItem('userInfo', payload.data.role_id);
 			return {
 				...state,
 				userInfo: payload,
 			};
-			break;
+		case SAVE_MENU_LIST:
+			dcStorage.setItem('meuList', payload);
+			return {
+				...state,
+				menuList: payload,
+			};
 		default:
 			return {
 				...state,

@@ -1,7 +1,5 @@
 class DcStorage {
 	setItem(key: string, val: any) {
-		console.log(val);
-		console.log(JSON.stringify({ value: val }));
 		window.localStorage.setItem(key, JSON.stringify({ value: val }));
 	}
 

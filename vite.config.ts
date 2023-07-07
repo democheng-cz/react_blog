@@ -23,8 +23,6 @@ export default defineConfig(({ mode }) => {
 					target: 'http://localhost:8888',
 					changeOrigin: false,
 					rewrite: path => {
-						console.log('path');
-						console.log(path);
 						return path.replace(/^\/api/, '');
 					},
 				},
