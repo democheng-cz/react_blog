@@ -12,3 +12,8 @@ export const reqLogin = (data: LoginParamsType) => request.post({ url: Api.login
 // 根据角色id获取菜单
 export const reqGetMenuList = (params: { role_id: string }) =>
 	request.get({ url: Api.getMenuList, params });
+
+// 获取角色列表
+export const reqRoleList = () => {
+	return request.get({ url: '/role' });
+};

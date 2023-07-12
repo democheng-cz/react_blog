@@ -32,6 +32,7 @@ class DcRequest {
 
 		this.instance.interceptors.response.use(
 			(res: AxiosResponse) => {
+				console.log(res.data.status);
 				if (res.data.status >= 300) {
 					message.error({
 						content: res.data.message,

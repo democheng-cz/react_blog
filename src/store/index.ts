@@ -1,12 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useSelector, useDispatch } from 'react-redux';
-import counterReducer from './feature/count';
 import loginReducer from './feature/login/reducer';
+import blogReducer from './feature/blog/reducer';
+import userReducer from './feature/user/reducer';
 
 const store = configureStore({
 	reducer: {
-		counterReducer,
-		loginReducer,
+		login: loginReducer,
+		blog: blogReducer,
+		user: userReducer,
 	},
 });
 

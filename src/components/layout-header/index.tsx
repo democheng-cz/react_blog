@@ -5,7 +5,7 @@ import type { MenuProps } from 'antd';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { dcStorage } from '@/utils/index';
 
-import { createLogoutAction, createSaveUserInfo } from '@/store/feature/login/actions';
+import { logoutAction, saveUserInfoAction } from '@/store/feature/login/actions';
 
 import { LayoutHeaderWrapper } from './style';
 
@@ -32,7 +32,8 @@ const LayoutHeader: React.FC = memo(() => {
 	];
 	useEffect(() => {
 		if (!userInfo?.account) {
-			dispatch(createSaveUserInfo(dcCache.getCache('userInfo')));
+			console.log('first');
+			dispatch(saveUserInfoAction(dcStorage.getItem('userInfo')));
 		}
 	}, []);
 
@@ -43,7 +44,7 @@ const LayoutHeader: React.FC = memo(() => {
 	};
 
 	const handleOk = () => {
-		dispatch(createLogoutAction());
+		dispatch(logoutAction());
 		setOpen(false);
 	};
 
@@ -53,12 +54,13 @@ const LayoutHeader: React.FC = memo(() => {
 	return (
 		<LayoutHeaderWrapper>
 			{userInfo?.account && (
-				<Header className='header'>
-					<div className='weather'></div>
+				<Header className='header flex items-center justify-end'>
+					<div className='weather text-slate-200'></div>
 					<img
+						// className={}
 						src={userInfo.avatar || require('@/assets/images/猫和老鼠.png')}
 						alt=''
-						style={{ height: '50px' }}
+						style={{ height: '50px', objectFit: 'cover' }}
 					/>
 					<div className='userInfo'>
 						<span style={{ color: '#fff' }}>欢迎回来，</span>

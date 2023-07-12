@@ -1,61 +1,51 @@
-import react, { useState } from 'react';
-import { Layout, Button, Menu } from 'antd';
-import {
-	AppstoreOutlined,
-	ContainerOutlined,
-	DesktopOutlined,
-	MailOutlined,
-	MenuFoldOutlined,
-	MenuUnfoldOutlined,
-	PieChartOutlined,
-} from '@ant-design/icons';
+import react, { useState, useEffect } from 'react';
+import { Layout } from 'antd';
 import type { MenuProps } from 'antd';
 import styled from 'styled-components';
-
+import DcMenu from '@/components/dc-menu';
+import { useAppDispatch, useAppSelector } from '@/store';
+import { createSaveActiveMenu, saveMenuListAction } from '@/store/feature/login/actions';
+import LayoutHeader from '@/components/layout-header';
+import { dcStorage } from '@/utils';
 const { Sider, Content } = Layout;
 
 const Container = () => {
-	type MenuItem = Required<MenuProps>['items'][number];
-	function getItem(
-		label: React.ReactNode,
-		key: React.Key,
-		icon?: React.ReactNode,
-		children?: MenuItem[],
-		type?: 'group'
-	): MenuItem {
+	const dispatch = useAppDispatch();
+	const { menuList, activeMenu, userInfo } = useAppSelector(state => {
 		return {
-			key,
-			icon,
-			children,
-			label,
-			type,
-		} as MenuItem;
-	}
-	const items: MenuItem[] = [
-		getItem('Option 1', '1', <PieChartOutlined />),
-		getItem('Option 2', '2', <DesktopOutlined />),
-		getItem('Option 3', '3', <ContainerOutlined />),
-
-		getItem('Navigation One', 'sub1', <MailOutlined />, [
-			getItem('Option 5', '5'),
-			getItem('Option 6', '6'),
-			getItem('Option 7', '7'),
-			getItem('Option 8', '8'),
-		]),
-
-		getItem('Navigation Two', 'sub2', <AppstoreOutlined />, [
-			getItem('Option 9', '9'),
-			getItem('Option 10', '10'),
-
-			getItem('Submenu', 'sub3', null, [getItem('Option 11', '11'), getItem('Option 12', '12')]),
-		]),
-	];
+			menuList: state.login.menuList,
+			activeMenu: state.login.activeMenu,
+			userInfo: state.login.userInfo.user_id ? state.login.userInfo : dcStorage.getItem('userInfo'),
+		};
+	});
 
 	const [collapsed, setCollapsed] = useState(false);
-
 	const toggleCollapsed = () => {
 		setCollapsed(!collapsed);
 	};
+
+	const changeMenuItem = (e: any) => {
+		const arr = [...activeMenu.openKey];
+		arr.push(e.keyPath[e.keyPath.length - 1]);
+		let newArr = Array.from(new Set(arr));
+		dispatch(createSaveActiveMenu({ openKey: newArr, selectKey: e.keyPath[0] }));
+	};
+	const changeSelectItem = (openKeys: any) => {
+		dispatch(
+			createSaveActiveMenu({
+				...dcStorage.getItem('activeMenu'),
+				openKey: openKeys,
+			})
+		);
+	};
+	useEffect(() => {
+		dispatch(saveMenuListAction(dcStorage.getItem('menuList')));
+	}, []);
+	useEffect(() => {
+		const selectKey = location.pathname;
+		const openKey = '/' + location.pathname.split('/')[1];
+		dispatch(createSaveActiveMenu({ selectKey, openKey: [openKey] }));
+	}, [location]);
 
 	return (
 		<LayoutWrapper>
@@ -63,7 +53,7 @@ const Container = () => {
 				{/* 左侧菜单栏 */}
 				<Sider breakpoint='md'>
 					<h1 className='logo'>DcBlog</h1>
-					{/* <DcMenu
+					<DcMenu
 						changeMenuItem={(e: any) => {
 							changeMenuItem(e);
 						}}
@@ -71,23 +61,14 @@ const Container = () => {
 							changeSelectItem(openKeys);
 						}}
 						menuList={menuList}
-						activeMenu={activeMenu.select || dcCache.getCache('activeMenu')}
-					/> */}
-					<div>
-						<Menu
-							defaultSelectedKeys={['1']}
-							defaultOpenKeys={['sub1']}
-							mode='inline'
-							theme='light'
-							// collapsed={collapsed}
-							items={items}
-						/>
-					</div>
+						activeMenu={activeMenu.select || dcStorage.getItem('activeMenu')}
+					/>
+					<div></div>
 				</Sider>
 				{/* 右侧内容区 */}
 				<Layout>
 					{/* 头部 */}
-					{/* <LayoutHeader /> */}
+					<LayoutHeader />
 					<Layout
 						style={{
 							padding: '15px',

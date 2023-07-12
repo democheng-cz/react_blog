@@ -5,7 +5,12 @@ import { useNavigate } from 'react-router-dom';
 import LoginPanelWrapper from './style';
 import { reqLogin } from '@/service/login';
 import { connect } from 'react-redux';
-import { getMenuList, saveUserInfoAction } from '@/store/feature/login/actions';
+import {
+	getMenuList,
+	saveUserInfoAction,
+	createSaveActiveMenu,
+	saveTokenAction,
+} from '@/store/feature/login/actions';
 // import { useAppDispatch } from '@/store';
 // import {
 // 	createSavaToken,
@@ -23,9 +28,14 @@ const LoginPanel = memo((props: any) => {
 			const res = await reqLogin(values);
 			console.log(res);
 			if (res.status === 200) {
-				props.saveUserInfo(res.result);
+				props.saveUserInfo(res.result.data);
 				props.getMenuList(res.result.data.role_id);
-				navigate('/blog/manage');
+				props.saveToken(res.result.token);
+				props.saveActiveMenu({
+					selectKey: '/blog/manage',
+					openKey: ['/blog'],
+				});
+				navigate('/');
 			}
 		} catch (error) {}
 	};
@@ -74,6 +84,12 @@ const mapDispatchToProps = (dispatch: any) => {
 		},
 		getMenuList: (payload: any) => {
 			dispatch(getMenuList(payload));
+		},
+		saveActiveMenu: (payload: any) => {
+			dispatch(createSaveActiveMenu(payload));
+		},
+		saveToken: (payload: any) => {
+			dispatch(saveTokenAction(payload));
 		},
 	};
 };
