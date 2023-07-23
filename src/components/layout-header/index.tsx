@@ -8,6 +8,7 @@ import { dcStorage } from '@/utils/index';
 import { logoutAction, saveUserInfoAction } from '@/store/feature/login/actions';
 
 import { LayoutHeaderWrapper } from './style';
+import defaultImg from '@/assets/images/猫和老鼠.png';
 
 const LayoutHeader: React.FC = memo(() => {
 	const { Header } = Layout;
@@ -58,7 +59,7 @@ const LayoutHeader: React.FC = memo(() => {
 					<div className='weather text-slate-200'></div>
 					<img
 						// className={}
-						src={userInfo.avatar || require('@/assets/images/猫和老鼠.png')}
+						src={userInfo.avatar || defaultImg}
 						alt=''
 						style={{ height: '50px', objectFit: 'cover' }}
 					/>

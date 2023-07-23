@@ -27,7 +27,6 @@ const DcMenu: React.FC<DcMenuType> = memo(props => {
 		changeSelectItem(openKeys);
 	};
 
-	console.log(activeMenu.selectKey);
 	return (
 		<DcMenuWrapper>
 			<Menu

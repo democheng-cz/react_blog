@@ -1,4 +1,5 @@
-import react, { useState, useEffect } from 'react';
+import react, { useState, useEffect, Suspense } from 'react';
+import { Outlet } from 'react-router-dom';
 import { Layout } from 'antd';
 import type { MenuProps } from 'antd';
 import styled from 'styled-components';
@@ -6,7 +7,9 @@ import DcMenu from '@/components/dc-menu';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { createSaveActiveMenu, saveMenuListAction } from '@/store/feature/login/actions';
 import LayoutHeader from '@/components/layout-header';
+import DcLoading from '@/components/dc-loading';
 import { dcStorage } from '@/utils';
+import { Auth } from '@/components/auth';
 const { Sider, Content } = Layout;
 
 const Container = () => {
@@ -48,51 +51,53 @@ const Container = () => {
 	}, [location]);
 
 	return (
-		<LayoutWrapper>
-			<Layout>
-				{/* 左侧菜单栏 */}
-				<Sider breakpoint='md'>
-					<h1 className='logo'>DcBlog</h1>
-					<DcMenu
-						changeMenuItem={(e: any) => {
-							changeMenuItem(e);
-						}}
-						changeSelectItem={(openKeys: string[]) => {
-							changeSelectItem(openKeys);
-						}}
-						menuList={menuList}
-						activeMenu={activeMenu.select || dcStorage.getItem('activeMenu')}
-					/>
-					<div></div>
-				</Sider>
-				{/* 右侧内容区 */}
+		<Auth>
+			<LayoutWrapper>
 				<Layout>
-					{/* 头部 */}
-					<LayoutHeader />
-					<Layout
-						style={{
-							padding: '15px',
-							backgroundColor: '#fff',
-						}}
-						className='layout-main'>
-						{/* 内容区 */}
-						<Content
+					{/* 左侧菜单栏 */}
+					<Sider breakpoint='md'>
+						<h1 className='logo'>DcBlog</h1>
+						<DcMenu
+							changeMenuItem={(e: any) => {
+								changeMenuItem(e);
+							}}
+							changeSelectItem={(openKeys: string[]) => {
+								changeSelectItem(openKeys);
+							}}
+							menuList={menuList}
+							activeMenu={activeMenu.select || dcStorage.getItem('activeMenu')}
+						/>
+						<div></div>
+					</Sider>
+					{/* 右侧内容区 */}
+					<Layout>
+						{/* 头部 */}
+						<LayoutHeader />
+						<Layout
 							style={{
-								padding: 24,
-								margin: 0,
-								minHeight: 280,
-								background: '#fff',
-							}}>
-							{/* <Suspense fallback={<DcLoading />}>
-								<Outlet />
-							</Suspense> */}
-						</Content>
+								padding: '15px',
+								backgroundColor: '#fff',
+							}}
+							className='layout-main'>
+							{/* 内容区 */}
+							<Content
+								style={{
+									padding: 24,
+									margin: 0,
+									minHeight: 280,
+									background: '#fff',
+								}}>
+								<Suspense fallback={<DcLoading />}>
+									<Outlet />
+								</Suspense>
+							</Content>
+						</Layout>
 					</Layout>
-				</Layout>
-				{/* </Col>
+					{/* </Col>
     </Row> */}
-			</Layout>
-		</LayoutWrapper>
+				</Layout>
+			</LayoutWrapper>
+		</Auth>
 	);
 };
 

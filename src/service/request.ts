@@ -8,7 +8,6 @@ import { dcStorage } from '@/utils';
 class DcRequest {
 	instance: AxiosInstance;
 	constructor() {
-		console.log(import.meta.env.VITE_BASE_URL);
 		// const [messageApi] = message.useMessage();
 		this.instance = axios.create({
 			baseURL: '/api',
@@ -32,7 +31,10 @@ class DcRequest {
 
 		this.instance.interceptors.response.use(
 			(res: AxiosResponse) => {
-				console.log(res.data.status);
+				// token失效/无token
+				if (res.data.status === 401) {
+					localStorage.clear();
+				}
 				if (res.data.status >= 300) {
 					message.error({
 						content: res.data.message,

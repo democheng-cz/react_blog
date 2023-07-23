@@ -25,7 +25,6 @@ const BlogManage = memo(() => {
 	const dispatch = useAppDispatch();
 
 	const navigate = useNavigate();
-
 	const { blogList, total, blogCategory } = useAppSelector((state: any) => {
 		return {
 			blogList: state.blog.blogList,
@@ -72,7 +71,7 @@ const BlogManage = memo(() => {
 				/>
 			</div>
 			{/* blog列表数据 */}
-			<div className='table'>
+			<div className='table' style={{ width: '100%' }}>
 				<PageTable
 					tableConfig={tableConfig}
 					data={blogList}
