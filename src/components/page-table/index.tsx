@@ -9,6 +9,7 @@ import { useAppDispatch } from '@/store';
 
 import { fetchUserList } from '@/store/feature/user/reducer';
 import { fetchBlogList, updateCurrentBlogFormData } from '@/store/feature/blog/reducer';
+import { changeSelectKeyAction } from '@/store/feature/login/actions';
 
 import { reqDeleteBlog } from '@/service/blog';
 import { reqDeleteUser, reqUpdateUserState } from '@/service/user';
@@ -99,6 +100,7 @@ const PageTable = (props: PageTablePropsType, ref: any) => {
 		switch (pageName) {
 			case 'blog':
 				dispatch(updateCurrentBlogFormData(record));
+				dispatch(changeSelectKeyAction('/blog/edit'));
 				navigate('/blog/edit');
 				break;
 			case 'user':

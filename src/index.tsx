@@ -7,6 +7,7 @@ import store from './store/index';
 
 import '@/assets/css/index.css';
 import '@/assets/less/reset.css';
+import 'antd/dist/reset.css';
 import 'normalize.css';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(

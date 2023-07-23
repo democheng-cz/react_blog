@@ -5,6 +5,7 @@ import {
 	LOGOUT,
 	SAVE_TOKEN,
 	SAVE_ROLE_lIST,
+	CHANGE_SELECT_KEY,
 } from './constant';
 import { reqGetMenuList, reqRoleList } from '@/service/login/index';
 
@@ -41,6 +42,13 @@ export const saveMenuListAction = (payload: any) => {
 export const createSaveActiveMenu = (payload: any) => {
 	return {
 		type: SAVE_ACTIVE_MENU,
+		payload,
+	};
+};
+
+export const changeSelectKeyAction = (payload: any) => {
+	return {
+		type: CHANGE_SELECT_KEY,
 		payload,
 	};
 };

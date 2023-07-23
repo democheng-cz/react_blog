@@ -9,3 +9,5 @@ export const LOGOUT = 'logout';
 export const SAVE_TOKEN = 'save_token';
 
 export const SAVE_ROLE_lIST = 'save_role_list';
+
+export const CHANGE_SELECT_KEY = 'change_select_key';

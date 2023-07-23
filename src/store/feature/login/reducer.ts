@@ -1,10 +1,17 @@
 import { dcStorage } from '@/utils';
-import { SAVE_USER_INFO, SAVE_MENU_LIST, SAVE_ACTIVE_MENU, LOGOUT, SAVE_TOKEN } from './constant';
+import {
+	SAVE_USER_INFO,
+	SAVE_MENU_LIST,
+	SAVE_ACTIVE_MENU,
+	LOGOUT,
+	SAVE_TOKEN,
+	CHANGE_SELECT_KEY,
+} from './constant';
 
 const initState = {
 	userInfo: dcStorage.getItem('userInfo') || {},
 	menuList: dcStorage.getItem('menuList') || [],
-	activeMenu: {
+	activeMenu: dcStorage.getItem('activeMenu') || {
 		openKey: [],
 		selectKey: '',
 	},
@@ -37,6 +44,12 @@ const loginReducer = (state = initState, action: ActionType) => {
 			return {
 				...state,
 				menuList: payload,
+			};
+		case CHANGE_SELECT_KEY:
+			console.log('payload', { ...state.activeMenu, selectKey: payload });
+			return {
+				...state,
+				activeMenu: { ...state.activeMenu, selectKey: payload },
 			};
 		case SAVE_ACTIVE_MENU:
 			if (payload.openKey) {

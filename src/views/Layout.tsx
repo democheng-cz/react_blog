@@ -72,7 +72,7 @@ const Container = () => {
 								changeSelectItem(openKeys);
 							}}
 							menuList={menuList}
-							activeMenu={activeMenu.select || dcStorage.getItem('activeMenu')}
+							activeMenu={activeMenu}
 						/>
 						<div></div>
 					</Sider>

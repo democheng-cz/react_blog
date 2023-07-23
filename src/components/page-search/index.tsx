@@ -25,7 +25,6 @@ const PageSearch: FC<PageSearchType> = props => {
 		addChange,
 	} = props;
 
-	console.log('selectData', props);
 	const originData: any = {};
 
 	formConfig.formItems.forEach((item: any) => {

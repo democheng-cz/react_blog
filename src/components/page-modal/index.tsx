@@ -1,63 +1,59 @@
-import React, { memo, useState, useImperativeHandle, useEffect } from "react"
+import React, { memo, useState, useImperativeHandle, useEffect } from 'react';
 
-import { message, Modal } from "antd"
+import { message, Modal } from 'antd';
 
-import { PageModalWrapper } from "./style"
+import { PageModalWrapper } from './style';
 
-import {
-	reqUpdateUserInfo,
-	reqUserList,
-	reqCreateUser,
-} from "@/service/user/index"
+import { reqUpdateUserInfo, reqUserList, reqCreateUser } from '@/service/user/index';
 
-import DcForm from "../dc-form"
-import { useAppDispatch, useAppSelector } from "@/store"
-import { fetchUserList } from "@/store/feature/user/reducer"
-import { createSaveUserInfo } from "@/store/feature/login/actions"
+import DcForm from '../dc-form';
+import { useAppDispatch, useAppSelector, useMemorizedSelector } from '@/store';
+import { fetchUserList } from '@/store/feature/user/reducer';
+import { createSaveUserInfo } from '@/store/feature/login/actions';
 
 interface PageModalPropsType {
-	formConfig: any
-	selectData: any[]
-	defaultInfo?: any
+	formConfig: any;
+	selectData: any[];
+	defaultInfo?: any;
 }
 
 const PageModal = (props: PageModalPropsType, ref: any) => {
-	const { userInfo } = useAppSelector(state => {
+	const { userInfo } = useMemorizedSelector(state => {
 		return {
 			userInfo: state.login.userInfo,
-		}
-	})
+		};
+	});
 
-	const dispatch = useAppDispatch()
+	const dispatch = useAppDispatch();
 
-	const { formConfig, selectData, defaultInfo } = props
-	const originData: any = {}
-	const [type, setType] = useState("update")
+	const { formConfig, selectData, defaultInfo } = props;
+	const originData: any = {};
+	const [type, setType] = useState('update');
 
-	const [showModal, setShowModal] = useState(false)
-	const [formData, setFormData] = useState<any>({})
+	const [showModal, setShowModal] = useState(false);
+	const [formData, setFormData] = useState<any>({});
 
 	const handleOk = async () => {
-		let res: any
-		console.log(formData)
+		let res: any;
+		console.log(formData);
 		switch (type) {
-			case "update":
-				res = await reqUpdateUserInfo({ ...formData, _id: defaultInfo._id })
-				break
-			case "add":
-				res = await reqCreateUser({ ...formData })
+			case 'update':
+				res = await reqUpdateUserInfo({ ...formData, _id: defaultInfo._id });
+				break;
+			case 'add':
+				res = await reqCreateUser({ ...formData });
 		}
 		// console.log(res)
 		if (res.status >= 200 && res.status < 300) {
-			message.success(res.message)
-			dispatch(fetchUserList({}))
-			setShowModal(false)
+			message.success(res.message);
+			dispatch(fetchUserList({}));
+			setShowModal(false);
 		}
-	}
+	};
 
 	const handleCancel = () => {
-		setShowModal(false)
-	}
+		setShowModal(false);
+	};
 
 	// 将需要给父组件调用的方法和属性暴露给父组件
 	useImperativeHandle(
@@ -67,19 +63,19 @@ const PageModal = (props: PageModalPropsType, ref: any) => {
 				setShowModal,
 				setFormData,
 				setType,
-			}
+			};
 		},
 		[]
-	)
+	);
 
 	useEffect(() => {
 		if (defaultInfo) {
 			formConfig.formItems.forEach((item: any) => {
-				originData[item.name] = defaultInfo[item.name]
-			})
+				originData[item.name] = defaultInfo[item.name];
+			});
 		}
-		setFormData({ ...originData })
-	}, [defaultInfo])
+		setFormData({ ...originData });
+	}, [defaultInfo]);
 	return (
 		<PageModalWrapper>
 			<Modal
@@ -87,9 +83,8 @@ const PageModal = (props: PageModalPropsType, ref: any) => {
 				onOk={() => handleOk()}
 				onCancel={handleCancel}
 				centered={true}
-				okText="确定"
-				cancelText="取消"
-			>
+				okText='确定'
+				cancelText='取消'>
 				<DcForm
 					formConfig={formConfig}
 					selectData={selectData}
@@ -98,6 +93,6 @@ const PageModal = (props: PageModalPropsType, ref: any) => {
 				/>
 			</Modal>
 		</PageModalWrapper>
-	)
-}
-export default memo(React.forwardRef(PageModal))
+	);
+};
+export default memo(React.forwardRef(PageModal));

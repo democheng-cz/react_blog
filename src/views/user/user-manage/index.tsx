@@ -14,7 +14,7 @@ import PageModal from '@/components/page-modal';
 import { modalConfig } from './modal-config';
 import usePageModal from '@/hooks/usePageModal';
 
-import { useAppDispatch, useAppSelector } from '@/store';
+import { useAppDispatch, useAppSelector, useMemorizedSelector } from '@/store';
 import { fetchUserList } from '@/store/feature/user/reducer';
 
 import { getRoleList } from '@/store/feature/login/actions';
@@ -33,7 +33,7 @@ const paginationProps = {
 
 const UserManage = memo(() => {
 	const dispatch = useAppDispatch();
-	const { userList, roleList } = useAppSelector(state => {
+	const { userList, roleList } = useMemorizedSelector(state => {
 		return {
 			userList: state.user.userList,
 			roleList: state.login.roleList,
