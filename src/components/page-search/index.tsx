@@ -60,8 +60,8 @@ const PageSearch: FC<PageSearchType> = props => {
 				return (
 					<Button
 						key={item.text}
-						// type={item.type}
-						type='default'
+						className='bg-blue-500'
+						type='primary'
 						size={item.size}
 						style={{ marginRight: item.marginLeft }}
 						danger={item.isDanger}

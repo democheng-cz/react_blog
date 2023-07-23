@@ -11,14 +11,6 @@ import {
 	createSaveActiveMenu,
 	saveTokenAction,
 } from '@/store/feature/login/actions';
-// import { useAppDispatch } from '@/store';
-// import {
-// 	createSavaToken,
-// 	createSaveActiveMenu,
-// 	createSaveUserInfo,
-// 	getMenuList,
-// 	getRoleList,
-// } from '@/store/feature/login/actions';
 
 const LoginPanel = memo((props: any) => {
 	const navigate = useNavigate();
@@ -63,7 +55,7 @@ const LoginPanel = memo((props: any) => {
 				</Form.Item>
 				<Form.Item className='btn'>
 					<div className='btns'>
-						<Button type='primary' htmlType='submit'>
+						<Button type='primary' htmlType='submit' className='bg-blue-500'>
 							登录
 						</Button>
 					</div>

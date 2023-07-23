@@ -115,16 +115,15 @@ const DcForm: React.FC<FormType> = memo(props => {
 					return item.label ? (
 						<Form.Item
 							label={item.label}
-							// style={{ width: item.width, marginRight: "5px" }}
-							key={item.name}
-							className='w-1/4 mr-4 md:w-4/5 '>
+							style={{ width: item.width, marginRight: '5px' }}
+							key={item.name}>
 							{renderFormItem(item)}
 						</Form.Item>
 					) : (
 						''
 					);
 				})}
-				<Form.Item className='lg:ml-40 md:ml-0 '>
+				<Form.Item>
 					{Btn?.map((item: ReactNode) => {
 						return item;
 					})}

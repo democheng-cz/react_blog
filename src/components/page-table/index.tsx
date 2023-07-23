@@ -173,6 +173,7 @@ const PageTable = (props: PageTablePropsType, ref: any) => {
 				return (
 					<Space size='middle'>
 						<Button
+							className='bg-blue-500'
 							size={'small'}
 							type={'primary'}
 							onClick={() => {
