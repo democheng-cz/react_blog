@@ -4,7 +4,7 @@ import { Layout } from 'antd';
 import type { MenuProps } from 'antd';
 import styled from 'styled-components';
 import DcMenu from '@/components/dc-menu';
-import { useAppDispatch, useAppSelector } from '@/store';
+import { useAppDispatch, useAppSelector, useMemorizedSelector } from '@/store';
 import { createSaveActiveMenu, saveMenuListAction } from '@/store/feature/login/actions';
 import LayoutHeader from '@/components/layout-header';
 import DcLoading from '@/components/dc-loading';
@@ -14,7 +14,14 @@ const { Sider, Content } = Layout;
 
 const Container = () => {
 	const dispatch = useAppDispatch();
-	const { menuList, activeMenu, userInfo } = useAppSelector(state => {
+	// const { menuList, activeMenu, userInfo } = useAppSelector(state => {
+	// 	return {
+	// 		menuList: state.login.menuList,
+	// 		activeMenu: state.login.activeMenu,
+	// 		userInfo: state.login.userInfo.user_id ? state.login.userInfo : dcStorage.getItem('userInfo'),
+	// 	};
+	// });
+	const { menuList, activeMenu, userInfo } = useMemorizedSelector(state => {
 		return {
 			menuList: state.login.menuList,
 			activeMenu: state.login.activeMenu,

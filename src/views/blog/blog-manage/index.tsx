@@ -11,7 +11,7 @@ import usePageSearch from '@/hooks/usePageSearch';
 import PageTable from '@/components/page-table';
 import { tableConfig } from './table-config';
 
-import { useAppDispatch, useAppSelector } from '@/store';
+import { useAppDispatch, useAppSelector, useMemorizedSelector } from '@/store';
 import { fetchBlogCategory, fetchBlogList } from '@/store/feature/blog/reducer';
 import { useNavigate } from 'react-router-dom';
 
@@ -25,7 +25,7 @@ const BlogManage = memo(() => {
 	const dispatch = useAppDispatch();
 
 	const navigate = useNavigate();
-	const { blogList, total, blogCategory } = useAppSelector((state: any) => {
+	const { blogList, total, blogCategory } = useMemorizedSelector((state: any) => {
 		return {
 			blogList: state.blog.blogList,
 			total: state.blog.blogTotal,
@@ -43,7 +43,16 @@ const BlogManage = memo(() => {
 
 	useEffect(() => {
 		dispatch(fetchBlogList({}));
-		dispatch(fetchBlogCategory());
+	}, []);
+
+	useEffect(() => {
+		if (!blogCategory.length) {
+			dispatch(fetchBlogCategory());
+		} else {
+			blogCategory.map((item: any) => {
+				return { label: item.category_name, value: item.category_id };
+			});
+		}
 	}, []);
 
 	const paginationProps = {

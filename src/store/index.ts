@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, createSelector } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useSelector, useDispatch } from 'react-redux';
 import loginReducer from './feature/login/reducer';
 import blogReducer from './feature/blog/reducer';
@@ -19,6 +19,21 @@ export type RootStateType = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
 export const useAppSelector: TypedUseSelectorHook<RootStateType> = useSelector;
+
 export const useAppDispatch: () => AppDispatch = useDispatch;
+
+const blogSelector = (state: RootStateType) => state.blog;
+const loginSelector = (state: RootStateType) => state.login;
+const userSelector = (state: RootStateType) => state.user;
+// 带有缓存性的selector
+export const useMemorizedSelector = (callback: (state: RootStateType) => any) => {
+	let selector = createSelector(
+		[blogSelector, loginSelector, userSelector],
+		(blog, login, user) => {
+			return callback(store.getState());
+		}
+	);
+	return useAppSelector(state => selector(state));
+};
 
 export default store;

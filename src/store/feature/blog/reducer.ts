@@ -21,7 +21,7 @@ const initialState: InitialStateType = {
 	blogList: [],
 	blogTotal: 0,
 	pageSize: 10,
-	blogCategory: [],
+	blogCategory: dcStorage.getItem('blogCategory') || [],
 	blogDetail: {},
 	currentBlogFormData: {},
 };

@@ -2,7 +2,7 @@ import React, { memo, useEffect, useState } from 'react';
 import { DownOutlined, SmileOutlined } from '@ant-design/icons';
 import { Layout, Dropdown, Space, Modal } from 'antd';
 import type { MenuProps } from 'antd';
-import { useAppDispatch, useAppSelector } from '@/store';
+import { useAppDispatch, useAppSelector, useMemorizedSelector } from '@/store';
 import { dcStorage } from '@/utils/index';
 
 import { logoutAction, saveUserInfoAction } from '@/store/feature/login/actions';
@@ -13,8 +13,13 @@ import defaultImg from '@/assets/images/猫和老鼠.png';
 const LayoutHeader: React.FC = memo(() => {
 	const { Header } = Layout;
 	const dispatch = useAppDispatch();
-	const userInfo = useAppSelector(state => {
-		return state.login.userInfo;
+	// const { userInfo } = useAppSelector(state => {
+	// 	return { userInfo: state.login.userInfo };
+	// });
+	const { userInfo } = useMemorizedSelector(state => {
+		return {
+			userInfo: state.login.userInfo,
+		};
 	});
 
 	const logout = () => {
